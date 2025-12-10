@@ -1,0 +1,21 @@
+# Imagen base con Python + Playwright (Ubuntu Jammy)
+FROM mcr.microsoft.com/playwright/python:v1.55.0-jammy
+
+
+# Directorio de trabajo
+WORKDIR /home/app
+# Evitar prompts interactivos (como tzdata)
+#ENV DEBIAN_FRONTEND=noninteractive
+#ENV TZ=America/Bogota
+
+# Copiar dependencias de Python
+COPY requirements.txt .
+
+# Instalar dependencias de Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiar código fuente
+COPY . /home/app
+
+# Comando por defecto
+CMD ["python", "main.py"]
